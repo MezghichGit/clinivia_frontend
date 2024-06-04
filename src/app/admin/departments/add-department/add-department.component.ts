@@ -7,6 +7,9 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
+import { DepartmentListService } from '../department-list/department-list.service';
+import { DepartmentList } from '../department-list/department-list.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-department',
@@ -27,17 +30,20 @@ import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.co
 })
 export class AddDepartmentComponent {
   departForm: UntypedFormGroup;
-  constructor(private fb: UntypedFormBuilder) {
+  constructor(private router:Router ,private fb: UntypedFormBuilder, public departmentListService: DepartmentListService) {
     this.departForm = this.fb.group({
-     git : ['', [Validators.required]],
+      d_no : ['', [Validators.required]],
       d_name: ['', [Validators.required]],
-      description: ['', [Validators.required]],
+      d_description: ['', [Validators.required]],
       d_date: ['', [Validators.required]],
       d_head: ['', [Validators.required]],
-      status: ['Active', [Validators.required]],
+      d_status: ['Active', [Validators.required]],
     });
+
   }
   onSubmit() {
     console.log('Form Value', this.departForm.value);
+    this.departmentListService.addDepartmentList(this.departForm.value);
+    this.router.navigate(["/admin//departments/department-list"]);
   }
 }

@@ -3,19 +3,19 @@ export class DepartmentList {
   id: number;
   d_no: string;
   d_name: string;
-  description: string;
+  d_description: string;
   d_date: string;
   d_head: string;
-  status: string;
+  d_status: string;
   constructor(departmentList: DepartmentList) {
     {
       this.id = departmentList.id || this.getRandomID();
       this.d_no = departmentList.d_no || '';
       this.d_name = departmentList.d_name || '';
-      this.description = departmentList.description || '';
+      this.d_description = departmentList.d_description || '';
       this.d_date = formatDate(new Date(), 'yyyy-MM-dd', 'en') || '';
       this.d_head = departmentList.d_head || '';
-      this.status = departmentList.status || 'Active';
+      this.d_status = departmentList.d_status || 'Active';
     }
   }
   public getRandomID(): number {

@@ -251,11 +251,11 @@ export class DepartmentListComponent
       this.dataSource.filteredData.map((x) => ({
         No: x.d_no,
         'Department Name': x.d_name,
-        Description: x.description,
+        Description: x.d_description,
         'Department Date':
           formatDate(new Date(x.d_date), 'yyyy-MM-dd', 'en') || '',
         'Department Head': x.d_head,
-        Status: x.status,
+        Status: x.d_status,
       }));
 
     TableExportUtil.exportToExcel(exportData, 'excel');
@@ -313,10 +313,10 @@ export class ExampleDataSource extends DataSource<DepartmentList> {
             const searchStr = (
               departmentList.d_no +
               departmentList.d_name +
-              departmentList.description +
+              departmentList.d_description +
               departmentList.d_date +
               departmentList.d_head +
-              departmentList.status
+              departmentList.d_status
             ).toLowerCase();
             return searchStr.indexOf(this.filter.toLowerCase()) !== -1;
           });
@@ -353,7 +353,7 @@ export class ExampleDataSource extends DataSource<DepartmentList> {
           [propertyA, propertyB] = [a.d_name, b.d_name];
           break;
         case 'description':
-          [propertyA, propertyB] = [a.description, b.description];
+          [propertyA, propertyB] = [a.d_description, b.d_description];
           break;
         case 'd_date':
           [propertyA, propertyB] = [a.d_date, b.d_date];
@@ -362,7 +362,7 @@ export class ExampleDataSource extends DataSource<DepartmentList> {
           [propertyA, propertyB] = [a.d_head, b.d_head];
           break;
         case 'status':
-          [propertyA, propertyB] = [a.status, b.status];
+          [propertyA, propertyB] = [a.d_status, b.d_status];
           break;
       }
       const valueA = isNaN(+propertyA) ? propertyA : +propertyA;

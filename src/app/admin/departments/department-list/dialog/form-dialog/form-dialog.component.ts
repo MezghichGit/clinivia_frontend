@@ -74,13 +74,13 @@ export class FormDialogComponent {
       id: [this.departmentList.id],
       d_no: [this.departmentList.d_no],
       d_name: [this.departmentList.d_name],
-      description: [this.departmentList.description],
+      description: [this.departmentList.d_description],
       d_date: [
         formatDate(this.departmentList.d_date, 'yyyy-MM-dd', 'en'),
         [Validators.required],
       ],
       d_head: [this.departmentList.d_head],
-      status: [this.departmentList.status],
+      status: [this.departmentList.d_status],
     });
   }
   submit() {

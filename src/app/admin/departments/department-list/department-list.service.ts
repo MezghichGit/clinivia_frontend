@@ -4,6 +4,7 @@ import { DepartmentList } from './department-list.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
 import { environment } from 'environments/environment.development';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -45,15 +46,16 @@ export class DepartmentListService extends UnsubscribeOnDestroyAdapter {
   addDepartmentList(departmentList: DepartmentList): void {
     this.dialogData = departmentList;
 
-    // this.httpClient.post(this.API_URL, departmentList)
-    //   .subscribe({
-    //     next: (data) => {
-    //       this.dialogData = departmentList;
-    //     },
-    //     error: (error: HttpErrorResponse) => {
+     this.httpClient.post(this.API_URL, departmentList)
+       .subscribe({
+         next: (data) => {
+           this.dialogData = departmentList;
+
+         },
+         error: (error: HttpErrorResponse) => {
     //        // error code here
-    //     },
-    //   });
+         },
+       });
   }
   updateDepartmentList(departmentList: DepartmentList): void {
     this.dialogData = departmentList;
