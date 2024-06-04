@@ -71,16 +71,16 @@ export class FormDialogComponent {
   }
   createContactForm(): UntypedFormGroup {
     return this.fb.group({
-      id: [this.departmentList.d_id],
+      d_id: [this.departmentList.d_id],
       d_no: [this.departmentList.d_no],
       d_name: [this.departmentList.d_name],
-      description: [this.departmentList.d_description],
+      d_description: [this.departmentList.d_description],
       d_date: [
         formatDate(this.departmentList.d_date, 'yyyy-MM-dd', 'en'),
         [Validators.required],
       ],
       d_head: [this.departmentList.d_head],
-      status: [this.departmentList.d_status],
+      d_status: [this.departmentList.d_status],
     });
   }
   submit() {
@@ -90,8 +90,16 @@ export class FormDialogComponent {
     this.dialogRef.close();
   }
   public confirmAdd(): void {
+
+  if (this.action === 'edit') {
+    this.departmentListService.updateDepartmentList(
+      this.departmentListForm.getRawValue()
+    );
+  }
+  else{
     this.departmentListService.addDepartmentList(
       this.departmentListForm.getRawValue()
     );
+  }
   }
 }

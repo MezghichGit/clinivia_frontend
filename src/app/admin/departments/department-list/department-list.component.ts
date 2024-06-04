@@ -127,6 +127,7 @@ export class DepartmentListComponent
   }
   editCall(row: DepartmentList) {
     this.id = row.d_id;
+    console.log(this.id)
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
       tempDirection = 'rtl';
@@ -150,6 +151,7 @@ export class DepartmentListComponent
         if (foundIndex != null && this.exampleDatabase) {
           this.exampleDatabase.dataChange.value[foundIndex] =
             this.departmentListService.getDialogData();
+
           // And lastly refresh table
           this.refreshTable();
           this.showNotification(

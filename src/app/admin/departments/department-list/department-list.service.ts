@@ -18,7 +18,7 @@ export class DepartmentListService extends UnsubscribeOnDestroyAdapter {
   >([]);
   // Temporarily stores data from dialogs
   dialogData!: DepartmentList;
-  constructor(private httpClient: HttpClient) {
+  constructor(private httpClient: HttpClient, private router?:Router) {
     super();
   }
   get data(): DepartmentList[] {
@@ -50,7 +50,7 @@ export class DepartmentListService extends UnsubscribeOnDestroyAdapter {
        .subscribe({
          next: (data) => {
            this.dialogData = departmentList;
-
+           this.router?.navigate(["/admin//departments/department-list"]);
          },
          error: (error: HttpErrorResponse) => {
     //        // error code here
@@ -59,16 +59,17 @@ export class DepartmentListService extends UnsubscribeOnDestroyAdapter {
   }
   updateDepartmentList(departmentList: DepartmentList): void {
     this.dialogData = departmentList;
-
-    // this.httpClient.put(this.API_URL + departmentList.id, departmentList)
-    //     .subscribe({
-    //       next: (data) => {
-    //         this.dialogData = departmentList;
-    //       },
-    //       error: (error: HttpErrorResponse) => {
-    //          // error code here
-    //       },
-    //     });
+    //console.log(this.dialogData)
+    this.httpClient.put(this.API_URL +'/'+ departmentList.d_id, departmentList)
+        .subscribe({
+          next: (data) => {
+            this.dialogData = departmentList;
+            //console.log(data)
+          },
+          error: (error: HttpErrorResponse) => {
+             // error code here
+          },
+        });
   }
   deleteDepartmentList(id: number): void {
     console.log(id);

@@ -70,10 +70,10 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
           <div class="m-b-20">
             <mat-label class="msr-3">Status:</mat-label>
-            <mat-radio-group aria-label="Select status" formControlName="status" required>
+            <mat-radio-group aria-label="Select status" formControlName="d_status" required>
               <mat-radio-button value="Active">Active</mat-radio-button>
               <mat-radio-button value="Inactive">Inactive</mat-radio-button>
-              @if (departmentListForm.get('status')?.hasError('required')) {
+              @if (departmentListForm.get('d_status')?.hasError('required')) {
               <mat-error>
                 Select status
               </mat-error>
@@ -86,7 +86,7 @@
         <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 mb-2">
           <mat-form-field class="example-full-width" appearance="outline">
             <mat-label>Description</mat-label>
-            <textarea matInput formControlName="description"></textarea>
+            <textarea matInput formControlName="d_description"></textarea>
           </mat-form-field>
         </div>
       </div>

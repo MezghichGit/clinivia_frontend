@@ -44,6 +44,6 @@ export class AddDepartmentComponent {
   onSubmit() {
     console.log('Form Value', this.departForm.value);
     this.departmentListService.addDepartmentList(this.departForm.value);
-    this.router.navigate(["/admin//departments/department-list"]);
+    //this.router.navigate(["/admin//departments/department-list"]);
   }
 }

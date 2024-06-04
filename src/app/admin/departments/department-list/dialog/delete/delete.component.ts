@@ -7,7 +7,7 @@ export interface DialogData {
   id: number;
   d_name: string;
   d_head: string;
-  status: string;
+  d_status: string;
 }
 
 @Component({
