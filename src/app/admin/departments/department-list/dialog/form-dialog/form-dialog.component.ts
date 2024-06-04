@@ -71,7 +71,7 @@ export class FormDialogComponent {
   }
   createContactForm(): UntypedFormGroup {
     return this.fb.group({
-      id: [this.departmentList.id],
+      id: [this.departmentList.d_id],
       d_no: [this.departmentList.d_no],
       d_name: [this.departmentList.d_name],
       description: [this.departmentList.d_description],

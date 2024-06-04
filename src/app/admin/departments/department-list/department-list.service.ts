@@ -73,14 +73,14 @@ export class DepartmentListService extends UnsubscribeOnDestroyAdapter {
   deleteDepartmentList(id: number): void {
     console.log(id);
 
-    // this.httpClient.delete(this.API_URL + id)
-    //     .subscribe({
-    //       next: (data) => {
-    //         console.log(id);
-    //       },
-    //       error: (error: HttpErrorResponse) => {
-    //          // error code here
-    //       },
-    //     });
+    this.httpClient.delete(this.API_URL +"/"+ id)
+        .subscribe({
+          next: (data) => {
+            console.log(id);
+          },
+          error: (error: HttpErrorResponse) => {
+             // error code here
+          },
+        });
   }
 }

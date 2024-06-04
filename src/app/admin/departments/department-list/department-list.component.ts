@@ -32,6 +32,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { MatButtonModule } from '@angular/material/button';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { BreadcrumbComponent } from '@shared/components/breadcrumb/breadcrumb.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-department-list',
@@ -77,7 +78,8 @@ export class DepartmentListComponent
     public httpClient: HttpClient,
     public dialog: MatDialog,
     public departmentListService: DepartmentListService,
-    private snackBar: MatSnackBar
+    private snackBar: MatSnackBar,
+    private router:Router
   ) {
     super();
   }
@@ -124,7 +126,7 @@ export class DepartmentListComponent
     });
   }
   editCall(row: DepartmentList) {
-    this.id = row.id;
+    this.id = row.d_id;
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
       tempDirection = 'rtl';
@@ -142,7 +144,7 @@ export class DepartmentListComponent
       if (result === 1) {
         // When using an edit things are little different, firstly we find record inside DataService by id
         const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-          (x) => x.id === this.id
+          (x) => x.d_id === this.id
         );
         // Then you update that record using data from dialogData (values you enetered)
         if (foundIndex != null && this.exampleDatabase) {
@@ -161,7 +163,10 @@ export class DepartmentListComponent
     });
   }
   deleteItem(row: DepartmentList) {
-    this.id = row.id;
+    this.id = row.d_id;
+    //console.log(this.id);
+
+
     let tempDirection: Direction;
     if (localStorage.getItem('isRtl') === 'true') {
       tempDirection = 'rtl';
@@ -172,10 +177,11 @@ export class DepartmentListComponent
       data: row,
       direction: tempDirection,
     });
+
     this.subs.sink = dialogRef.afterClosed().subscribe((result) => {
       if (result === 1) {
         const foundIndex = this.exampleDatabase?.dataChange.value.findIndex(
-          (x) => x.id === this.id
+          (x) => x.d_id === this.id
         );
         // for delete we use splice in order to remove single object from DataService
         if (foundIndex != null && this.exampleDatabase) {
@@ -189,6 +195,10 @@ export class DepartmentListComponent
             'center'
           );
         }
+        // appel au service pour suppression
+        this.departmentListService.deleteDepartmentList(this.id);
+       // this.router.navigate(["/admin//departments/department-list"]);
+        // fin suppression
       }
     });
   }
@@ -344,7 +354,7 @@ export class ExampleDataSource extends DataSource<DepartmentList> {
       let propertyB: number | string = '';
       switch (this._sort.active) {
         case 'id':
-          [propertyA, propertyB] = [a.id, b.id];
+          [propertyA, propertyB] = [a.d_id, b.d_id];
           break;
         case 'd_no':
           [propertyA, propertyB] = [a.d_no, b.d_no];

@@ -1,6 +1,6 @@
 import { formatDate } from '@angular/common';
 export class DepartmentList {
-  id: number;
+  d_id: number;
   d_no: string;
   d_name: string;
   d_description: string;
@@ -9,7 +9,7 @@ export class DepartmentList {
   d_status: string;
   constructor(departmentList: DepartmentList) {
     {
-      this.id = departmentList.id || this.getRandomID();
+      this.d_id = departmentList.d_id || this.getRandomID();
       this.d_no = departmentList.d_no || '';
       this.d_name = departmentList.d_name || '';
       this.d_description = departmentList.d_description || '';
