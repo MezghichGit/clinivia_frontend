@@ -29,7 +29,7 @@ export class AddDepartmentComponent {
   departForm: UntypedFormGroup;
   constructor(private fb: UntypedFormBuilder) {
     this.departForm = this.fb.group({
-      d_no: ['', [Validators.required]],
+     git : ['', [Validators.required]],
       d_name: ['', [Validators.required]],
       description: ['', [Validators.required]],
       d_date: ['', [Validators.required]],

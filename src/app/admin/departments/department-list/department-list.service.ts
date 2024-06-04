@@ -3,13 +3,14 @@ import { BehaviorSubject } from 'rxjs';
 import { DepartmentList } from './department-list.model';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { UnsubscribeOnDestroyAdapter } from '@shared';
+import { environment } from 'environments/environment.development';
 
 @Injectable({
   providedIn: 'root',
 })
 
 export class DepartmentListService extends UnsubscribeOnDestroyAdapter {
-  private readonly API_URL = 'assets/data/departmentList.json';
+  private readonly API_URL = environment.apiDepartements;
   isTblLoading = true;
   dataChange: BehaviorSubject<DepartmentList[]> = new BehaviorSubject<
     DepartmentList[]
@@ -31,6 +32,7 @@ export class DepartmentListService extends UnsubscribeOnDestroyAdapter {
       .get<DepartmentList[]>(this.API_URL)
       .subscribe({
         next: (data) => {
+          console.log(data)
           this.isTblLoading = false;
           this.dataChange.next(data);
         },
